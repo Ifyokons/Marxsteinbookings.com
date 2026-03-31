@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MarxStein Group Rental FR — Douala, Cameroun</title>
+  <meta name="description" content="Version bilingue français-anglais de MarxStein Group avec réservation, calculateur de prix, pages login/register prêtes pour backend et support WhatsApp." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root, [data-theme="light"] {
+      --text-xs: clamp(0.75rem, 0.7rem + 0.25vw, 0.875rem);
+      --text-sm: clamp(0.875rem, 0.8rem + 0.35vw, 1rem);
+      --text-base: clamp(1rem, 0.95rem + 0.25vw, 1.1rem);
+      --text-lg: clamp(1.125rem, 1rem + 0.75vw, 1.5rem);
+      --text-xl: clamp(1.5rem, 1.2rem + 1.25vw, 2.2rem);
+      --text-2xl: clamp(2rem, 1.2rem + 2.5vw, 3.4rem);
+      --space-1: .25rem; --space-2: .5rem; --space-3: .75rem; --space-4: 1rem; --space-5: 1.25rem; --space-6: 1.5rem; --space-8: 2rem; --space-10: 2.5rem; --space-12: 3rem; --space-16: 4rem; --space-20: 5rem;
+      --color-bg: #f7f5f8; --color-surface: #ffffff; --color-surface-2: #f2edf4; --color-surface-offset: #ece4ef;
+      --color-border: rgba(35,12,45,.12); --color-divider: #ded2e2; --color-text: #230c2d; --color-text-muted: #6d5a75; --color-text-faint: #a692ae; --color-text-inverse: #faf7fc;
+      --color-primary: #5e088c; --color-primary-hover: #411047; --color-secondary: #856887; --color-accent: #c7a9d2;
+      --shadow-sm: 0 2px 8px rgba(37,18,47,.06); --shadow-md: 0 18px 40px rgba(37,18,47,.10); --shadow-lg: 0 26px 70px rgba(37,18,47,.14);
+      --radius-md: .9rem; --radius-lg: 1.25rem; --radius-xl: 1.8rem; --radius-full: 999px;
+      --content: 1220px;
+      --font-body: 'Open Sans', Arial, sans-serif; --font-display: 'Roboto', Arial, sans-serif;
+    }
+    [data-theme="dark"] {
+      --color-bg: #140a18; --color-surface: #1d1124; --color-surface-2: #26152f; --color-surface-offset: #311b3a;
+      --color-border: rgba(255,255,255,.10); --color-divider: #432b4d; --color-text: #f4edf8; --color-text-muted: #c2b0ca; --color-text-faint: #8b7694; --color-text-inverse: #140a18;
+      --color-primary: #b88bcc; --color-primary-hover: #d8b7e3; --color-secondary: #d2bfd8; --color-accent: #7d5a91;
+      --shadow-sm: 0 2px 8px rgba(0,0,0,.24); --shadow-md: 0 18px 40px rgba(0,0,0,.28); --shadow-lg: 0 26px 70px rgba(0,0,0,.35);
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; }
+    body {
+      min-height:100dvh; font-family:var(--font-body); font-size:var(--text-base); line-height:1.6; color:var(--color-text);
+      background:radial-gradient(circle at top right, rgba(94,8,140,.12), transparent 28%), radial-gradient(circle at left 25%, rgba(133,104,135,.12), transparent 24%), var(--color-bg);
+    }
+    img, svg { display:block; max-width:100%; height:auto; }
+    a { color:inherit; text-decoration:none; }
+    button, input, select, textarea { font:inherit; }
+    button { cursor:pointer; border:none; background:none; }
+    .container { width:min(calc(100% - 2rem), var(--content)); margin-inline:auto; }
+    .skip-link { position:absolute; left:-999px; top:1rem; background:var(--color-primary); color:var(--color-text-inverse); padding:.75rem 1rem; border-radius:var(--radius-full); }
+    .skip-link:focus { left:1rem; z-index:90; }
+    .site-header { position:sticky; top:0; z-index:70; backdrop-filter:blur(14px); background:color-mix(in srgb, var(--color-bg) 85%, transparent); border-bottom:1px solid var(--color-border); }
+    .nav-row { min-height:78px; display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    .brand { display:flex; align-items:center; gap:.8rem; }
+    .brand-mark { width:48px; height:48px; border-radius:16px; display:grid; place-items:center; color:#fff; background:linear-gradient(135deg, #5e088c, #411047); box-shadow:var(--shadow-sm); }
+    .brand-copy strong { display:block; font-size:var(--text-sm); letter-spacing:.08em; text-transform:uppercase; }
+    .brand-copy span { display:block; font-size:var(--text-xs); color:var(--color-text-muted); }
+    .nav-links, .nav-actions, .lang-switch { display:flex; align-items:center; gap:1rem; }
+    .nav-links a { color:var(--color-text-muted); font-size:var(--text-sm); }
+    .theme-toggle, .menu-toggle, .lang-btn {
+      min-width:44px; min-height:44px; padding:0 .9rem; border-radius:999px; background:var(--color-surface); border:1px solid var(--color-border);
+      display:inline-flex; align-items:center; justify-content:center;
+    }
+    .lang-btn.active { background:var(--color-primary); color:var(--color-text-inverse); }
+    .menu-toggle { display:none; }
+    .btn { display:inline-flex; align-items:center; justify-content:center; gap:.5rem; min-height:46px; padding:0 1.25rem; border-radius:999px; font-size:var(--text-sm); font-weight:700; transition:.2s ease; }
+    .btn:hover { transform:translateY(-1px); }
+    .btn-primary { background:var(--color-primary); color:var(--color-text-inverse); box-shadow:var(--shadow-md); }
+    .btn-primary:hover { background:var(--color-primary-hover); }
+    .btn-secondary { background:var(--color-surface); border:1px solid var(--color-border); }
+    .btn-whatsapp { background:#25d366; color:#102516; }
+    main section { padding:clamp(2.5rem, 7vw, 5rem) 0; }
+    .hero { padding-top:clamp(2.5rem, 8vw, 5rem); }
+    .hero-grid, .two-col, .contact-grid { display:grid; grid-template-columns:1.05fr .95fr; gap:2rem; align-items:start; }
+    .eyebrow { display:inline-flex; align-items:center; gap:.5rem; padding:.45rem .85rem; border-radius:999px; background:rgba(94,8,140,.10); color:var(--color-primary); font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.08em; }
+    h1, h2, h3 { font-family:var(--font-display); line-height:1.08; }
+    h1 { font-size:clamp(2.7rem, 6vw, 5rem); letter-spacing:-.04em; max-width:11ch; margin:1.25rem 0 1rem; }
+    h2 { font-size:clamp(2rem, 3vw, 3rem); letter-spacing:-.03em; }
+    p, li, .muted { color:var(--color-text-muted); }
+    .hero-actions, .form-actions { display:flex; flex-wrap:wrap; gap:.75rem; margin-top:1.5rem; }
+    .stats, .fleet-grid, .cards-3, .auth-grid { display:grid; gap:1rem; }
+    .stats { grid-template-columns:repeat(3,1fr); margin-top:1.5rem; }
+    .card, .visual-card, .auth-card, .contact-card { background:var(--color-surface); border:1px solid var(--color-border); border-radius:var(--radius-xl); box-shadow:var(--shadow-sm); }
+    .card, .auth-card, .contact-card { padding:1.4rem; }
+    .stat strong { display:block; font-size:var(--text-lg); color:var(--color-text); }
+    .visual-card { overflow:hidden; min-height:640px; position:relative; background:linear-gradient(160deg, #ffffff, #f3eaf5 52%, #e9dff0 100%); }
+    .visual-meta { display:flex; justify-content:space-between; gap:1rem; padding:1.2rem; position:absolute; inset:0 0 auto 0; z-index:2; }
+    .glass { background:rgba(255,255,255,.82); backdrop-filter:blur(14px); border:1px solid rgba(65,16,71,.08); border-radius:1rem; padding:.85rem 1rem; }
+    [data-theme="dark"] .glass, [data-theme="dark"] .calc-box { background:rgba(32,18,40,.88); }
+    .road-stage { position:absolute; inset:82px 18px 172px; border-radius:26px; overflow:hidden; background:linear-gradient(180deg, #f0e7f4 0%, #ddcce4 28%, #cdb2d7 29%, #d8cadf 100%); }
+    .road-stage::before { content:""; position:absolute; left:0; right:0; bottom:68px; height:120px; background:linear-gradient(180deg, #77617b, #433247); transform:skewY(-3deg) scale(1.05); }
+    .road-stage::after { content:""; position:absolute; left:8%; right:8%; bottom:118px; height:4px; background:repeating-linear-gradient(90deg, #f8eabb 0 30px, transparent 30px 58px); }
+    .road-stage svg { position:absolute; left:5%; bottom:40px; width:90%; }
+    .calc-box { position:absolute; left:18px; right:18px; bottom:18px; background:rgba(255,255,255,.87); border:1px solid var(--color-border); border-radius:1.4rem; box-shadow:var(--shadow-lg); padding:1.2rem; }
+    .fields, .fleet-grid, .cards-3, .auth-grid { grid-template-columns:repeat(3,1fr); }
+    .fields { display:grid; gap:.85rem; }
+    .field { display:grid; gap:.4rem; }
+    .field label { font-size:var(--text-xs); font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--color-text-muted); }
+    .input, select, textarea { width:100%; min-height:46px; border-radius:.9rem; border:1px solid var(--color-border); background:var(--color-surface); color:var(--color-text); padding:0 1rem; }
+    textarea { min-height:120px; padding:1rem; resize:vertical; }
+    .calc-result { margin-top:1rem; border-radius:1rem; background:var(--color-surface-2); border:1px solid var(--color-border); padding:1rem; }
+    .section-heading { display:flex; align-items:end; justify-content:space-between; gap:1rem; margin-bottom:2rem; }
+    .fleet-grid { margin-top:1rem; }
+    .fleet-card { overflow:hidden; padding:0; }
+    .fleet-media { aspect-ratio:16/10; overflow:hidden; border-bottom:1px solid var(--color-border); background:#eee3f2; }
+    .fleet-media img { width:100%; height:100%; object-fit:cover; }
+    .fleet-body { padding:1.2rem; }
+    .pill-row { display:flex; flex-wrap:wrap; gap:.5rem; margin:.8rem 0 1rem; }
+    .pill { font-size:var(--text-xs); padding:.35rem .7rem; border-radius:999px; border:1px solid var(--color-border); background:var(--color-surface-2); color:var(--color-text-muted); }
+    .price-line { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+    .cards-3, .auth-grid { gap:1rem; }
+    .auth-card code { display:block; margin-top:.5rem; padding:.8rem 1rem; background:var(--color-surface-2); border-radius:1rem; border:1px solid var(--color-border); color:var(--color-text); overflow:auto; }
+    .endpoint-list { display:grid; gap:.85rem; margin-top:1rem; }
+    .contact-grid { gap:1rem; }
+    .footer { padding:2rem 0 3rem; }
+    .footer-row { padding-top:1.25rem; border-top:1px solid var(--color-border); display:flex; justify-content:space-between; flex-wrap:wrap; gap:1rem; color:var(--color-text-muted); }
+    [hidden] { display:none !important; }
+    @media (max-width: 1080px) {
+      .hero-grid, .two-col, .contact-grid { grid-template-columns:1fr; }
+      .fleet-grid, .cards-3, .auth-grid { grid-template-columns:repeat(2,1fr); }
+    }
+    @media (max-width: 760px) {
+      .nav-links { display:none; position:absolute; left:1rem; right:1rem; top:calc(100% + .75rem); padding:1rem; background:var(--color-surface); border:1px solid var(--color-border); border-radius:1rem; box-shadow:var(--shadow-lg); flex-direction:column; align-items:flex-start; }
+      .nav-links.open { display:flex; }
+      .menu-toggle { display:inline-flex; }
+      .nav-actions .btn-secondary { display:none; }
+      .lang-switch { order:3; width:100%; justify-content:flex-start; }
+      .stats, .fleet-grid, .cards-3, .auth-grid, .fields { grid-template-columns:1fr; }
+      .visual-card { min-height:720px; }
+      .road-stage { inset:82px 14px 260px; }
+      .section-heading { flex-direction:column; align-items:flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip-link">Aller au contenu</a>
+  <header class="site-header">
+    <div class="container nav-row">
+      <a href="#top" class="brand" aria-label="Accueil MarxStein Group">
+        <span class="brand-mark" aria-hidden="true">
+          <svg width="28" height="28" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="6" y="6" width="52" height="52" rx="16" stroke="currentColor" stroke-width="3"/><path d="M18 44V20H24L32 31L40 20H46V44H40V30L32 40L24 30V44H18Z" fill="currentColor"/></svg>
+        </span>
+        <span class="brand-copy"><strong>MarxStein Group</strong><span data-i18n="brandTagline">Location de voitures à Douala</span></span>
+      </a>
+      <nav class="nav-links" id="site-nav" aria-label="Navigation principale">
+        <a href="#fleet" data-i18n="navFleet">Flotte</a>
+        <a href="#booking" data-i18n="navBooking">Réservation</a>
+        <a href="#auth" data-i18n="navAuth">Connexion</a>
+        <a href="#backend" data-i18n="navBackend">Backend</a>
+        <a href="#contact" data-i18n="navContact">Contact</a>
+      </nav>
+      <div class="nav-actions">
+        <div class="lang-switch" aria-label="Language switcher">
+          <button class="lang-btn active" type="button" data-lang="fr">FR</button>
+          <button class="lang-btn" type="button" data-lang="en">EN</button>
+        </div>
+        <button class="theme-toggle" type="button" data-theme-toggle aria-label="Changer le thème">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+        </button>
+        <a class="btn btn-secondary" href="#auth" data-i18n="loginBtn">Connexion</a>
+        <a class="btn btn-primary" href="#booking" data-i18n="bookBtn">Réserver</a>
+        <button class="menu-toggle" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="site-nav"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="container hero-grid">
+        <div>
+          <span class="eyebrow" data-i18n="heroEyebrow">Douala • Aéroport • Véhicules de luxe • SUV 4X4</span>
+          <h1 data-i18n="heroTitle">Location premium et mobilité aéroportuaire à Douala.</h1>
+          <p data-i18n="heroText">MarxStein Group se présente comme une société privée de location de voitures basée à Douala, au Cameroun, et met en avant la location abordable, les véhicules de luxe, les SUV 4X4 et le service chauffeur. Cette version bilingue transforme cette offre en expérience de réservation moderne. </p>
+          <div class="hero-actions">
+            <a class="btn btn-primary" href="#booking" data-i18n="heroCta1">Réserver un véhicule</a>
+            <a class="btn btn-whatsapp" href="https://wa.me/237651536837" target="_blank" rel="noopener noreferrer">WhatsApp</a>
+          </div>
+          <div class="stats">
+            <article class="card stat"><strong>+237 6 73 05 96 49</strong><span class="muted" data-i18n="stat1">Téléphone publié sur la page contact</span></article>
+            <article class="card stat"><strong>+237651536837</strong><span class="muted" data-i18n="stat2">WhatsApp pour devis et réservations</span></article>
+            <article class="card stat"><strong data-i18n="stat3a">Douala, Cameroun</strong><span class="muted" data-i18n="stat3">Zone de service locale et transferts ville-aéroport</span></article>
+          </div>
+        </div>
+        <div class="visual-card">
+          <div class="visual-meta">
+            <div class="glass"><strong data-i18n="glass1Title">Service aéroport</strong><div class="muted" style="font-size:var(--text-xs)" data-i18n="glass1Text">Prise en charge DLA et livraison hôtel</div></div>
+            <div class="glass"><strong data-i18n="glass2Title">Flotte luxe & 4X4</strong><div class="muted" style="font-size:var(--text-xs)" data-i18n="glass2Text">Business, famille et chauffeur</div></div>
+          </div>
+          <div class="road-stage" aria-hidden="true">
+            <svg viewBox="0 0 860 380" xmlns="http://www.w3.org/2000/svg" fill="none"><ellipse cx="426" cy="286" rx="270" ry="42" fill="rgba(0,0,0,.14)"/><path d="M180 238L234 157C248 135 271 122 298 122H553C584 122 612 139 628 165L677 238H180Z" fill="#5e088c"/><path d="M263 136H538C571 136 598 152 614 177L633 209H231L247 162C252 146 266 136 283 136Z" fill="#856887" opacity=".48"/><path d="M252 148H394V210H220L236 172C241 157 255 148 271 148Z" fill="#f7f2fa"/><path d="M410 148H551C571 148 589 157 601 173L628 210H410V148Z" fill="#f7f2fa"/><path d="M148 238H708C731 238 750 257 750 280V289H107V280C107 257 126 238 148 238Z" fill="#311b3a"/><circle cx="250" cy="290" r="54" fill="#1f1f1f"/><circle cx="250" cy="290" r="27" fill="#dddddd"/><circle cx="612" cy="290" r="54" fill="#1f1f1f"/><circle cx="612" cy="290" r="27" fill="#dddddd"/><rect x="160" y="232" width="64" height="24" rx="12" fill="#d8b7e3"/><rect x="635" y="232" width="64" height="24" rx="12" fill="#d8b7e3"/></svg>
+          </div>
+          <div class="calc-box" id="booking">
+            <h3 data-i18n="calcTitle">Calculateur de prix et réservation</h3>
+            <form id="bookingForm">
+              <div class="fields">
+                <div class="field">
+                  <label for="pickup" data-i18n="pickupLabel">Lieu de départ</label>
+                  <select id="pickup" name="pickup" required>
+                    <option>Douala Airport (DLA)</option>
+                    <option>Bonanjo</option>
+                    <option>Bonapriso</option>
+                    <option>Akwa</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="vehicle" data-i18n="vehicleLabel">Type de véhicule</label>
+                  <select id="vehicle" name="vehicle" required>
+                    <option value="38000">City Compact</option>
+                    <option value="65000">Executive Sedan</option>
+                    <option value="95000">Luxury 4X4 SUV</option>
+                  </select>
+                </div>
+                <div class="field">
+                  <label for="days" data-i18n="daysLabel">Nombre de jours</label>
+                  <input class="input" id="days" name="days" type="number" min="1" value="3" required />
+                </div>
+                <div class="field">
+                  <label for="service" data-i18n="serviceLabel">Service</label>
+                  <select id="service" name="service" required>
+                    <option value="0" data-i18n-option="selfDrive">Self-drive</option>
+                    <option value="25000" data-i18n-option="chauffeur">Avec chauffeur</option>
+                  </select>
+                </div>
+              </div>
+              <div class="calc-result">
+                <strong data-i18n="estimateTitle">Montant estimé</strong>
+                <div id="priceResult" style="font-size:var(--text-lg); margin-top:.25rem;">114,000 XAF</div>
+                <div class="muted" style="font-size:var(--text-xs); margin-top:.35rem;" data-i18n="estimateText">Calcul = tarif journalier × jours + option chauffeur par jour.</div>
+              </div>
+              <div class="form-actions">
+                <button class="btn btn-primary" type="submit" data-i18n="submitReservation">Envoyer la réservation</button>
+                <a class="btn btn-secondary" href="https://wa.me/237651536837?text=Bonjour%20MarxStein%20Group%2C%20je%20souhaite%20faire%20une%20reservation" target="_blank" rel="noopener noreferrer" data-i18n="sendWhatsapp">Envoyer par WhatsApp</a>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fleet">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow" data-i18n="fleetEyebrow">Flotte véhicules</span>
+            <h2 data-i18n="fleetTitle">Liste des véhicules MarxStein Group.</h2>
+          </div>
+          <p data-i18n="fleetText">La page services de MarxStein met en avant la location abordable, les véhicules de luxe, les SUV 4X4 et le service chauffeur, et cette flotte reprend ces catégories sous forme de cartes claires avec prix journalier en XAF. </p>
+        </div>
+        <div class="fleet-grid">
+          <article class="card fleet-card">
+            <div class="fleet-media"><img src="https://picsum.photos/seed/marxstein-city-sedan-v2/900/560" alt="Voiture compacte MarxStein Group" width="900" height="560" loading="lazy"></div>
+            <div class="fleet-body"><h3>City Compact</h3><p data-i18n="fleet1Text">Parfaite pour les trajets urbains à Douala et les déplacements rapides.</p><div class="pill-row"><span class="pill">Automatic</span><span class="pill">AC</span><span class="pill">4 seats</span></div><div class="price-line"><strong>38,000 XAF / day</strong><a href="#booking" data-i18n="selectText">Choisir</a></div></div>
+          </article>
+          <article class="card fleet-card">
+            <div class="fleet-media"><img src="https://picsum.photos/seed/marxstein-executive-sedan-v2/900/560" alt="Berline executive MarxStein Group" width="900" height="560" loading="lazy"></div>
+            <div class="fleet-body"><h3>Executive Sedan</h3><p data-i18n="fleet2Text">Idéale pour les rendez-vous d'affaires, hôtels et transferts aéroport.</p><div class="pill-row"><span class="pill">Chauffeur option</span><span class="pill">5 seats</span><span class="pill">Premium</span></div><div class="price-line"><strong>65,000 XAF / day</strong><a href="#booking" data-i18n="selectText">Choisir</a></div></div>
+          </article>
+          <article class="card fleet-card">
+            <div class="fleet-media"><img src="https://picsum.photos/seed/marxstein-luxury-suv-v2/900/560" alt="SUV 4X4 de luxe MarxStein Group" width="900" height="560" loading="lazy"></div>
+            <div class="fleet-body"><h3>Luxury 4X4 SUV</h3><p data-i18n="fleet3Text">Option haut de gamme pour confort, visibilité et routes variées.</p><div class="pill-row"><span class="pill">4X4</span><span class="pill">7 seats</span><span class="pill">Long stay</span></div><div class="price-line"><strong>95,000 XAF / day</strong><a href="#booking" data-i18n="selectText">Choisir</a></div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="auth">
+      <div class="container two-col">
+        <article class="auth-card">
+          <span class="eyebrow" data-i18n="authEyebrow">Connexion</span>
+          <h2 style="margin-top:1rem;" data-i18n="loginTitle">Connexion utilisateur prête pour backend.</h2>
+          <p style="margin-top:1rem;" data-i18n="loginText">Les bonnes pratiques de formulaires de connexion recommandent l’utilisation de balises form, label, name, id, type et autocomplete stables, ce qui est inclus ici pour faciliter l’intégration backend. </p>
+          <form id="loginForm" method="post" action="/api/auth/login" novalidate>
+            <div class="field">
+              <label for="login-email" data-i18n="emailLabel">Adresse e-mail</label>
+              <input class="input" id="login-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field" style="margin-top:.85rem;">
+              <label for="login-password" data-i18n="passwordLabel">Mot de passe</label>
+              <input class="input" id="login-password" name="password" type="password" autocomplete="current-password" required minlength="8">
+            </div>
+            <div class="field" style="margin-top:.85rem;">
+              <label><input type="checkbox" name="remember_me" value="1" autocomplete="off"> <span data-i18n="rememberMe">Se souvenir de moi</span></label>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit" data-i18n="signIn">Se connecter</button>
+              <a class="btn btn-secondary" href="#register" data-i18n="createAccount">Créer un compte</a>
+            </div>
+          </form>
+        </article>
+        <article class="auth-card" id="register">
+          <span class="eyebrow" data-i18n="registerEyebrow">Inscription</span>
+          <h2 style="margin-top:1rem;" data-i18n="registerTitle">Page d'inscription prête pour backend.</h2>
+          <p style="margin-top:1rem;" data-i18n="registerText">Le formulaire d’inscription ci-dessous est structuré avec des noms de champs clairs et des attributs HTML adaptés pour simplifier la connexion à une API d’authentification ou à un framework backend. </p>
+          <form id="registerForm" method="post" action="/api/auth/register" novalidate>
+            <div class="field">
+              <label for="register-name" data-i18n="fullNameLabel">Nom complet</label>
+              <input class="input" id="register-name" name="full_name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field" style="margin-top:.85rem;">
+              <label for="register-email" data-i18n="emailLabel">Adresse e-mail</label>
+              <input class="input" id="register-email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field" style="margin-top:.85rem;">
+              <label for="register-phone" data-i18n="phoneLabel">Téléphone</label>
+              <input class="input" id="register-phone" name="phone" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="field" style="margin-top:.85rem;">
+              <label for="register-password" data-i18n="passwordLabel">Mot de passe</label>
+              <input class="input" id="register-password" name="password" type="password" autocomplete="new-password" required minlength="8">
+            </div>
+            <div class="field" style="margin-top:.85rem;">
+              <label for="register-password-confirm" data-i18n="confirmPasswordLabel">Confirmer le mot de passe</label>
+              <input class="input" id="register-password-confirm" name="password_confirmation" type="password" autocomplete="new-password" required minlength="8">
+            </div>
+            <div class="field" style="margin-top:.85rem;">
+              <label><input type="checkbox" name="accept_terms" value="1" required> <span data-i18n="acceptTerms">J'accepte les conditions d'utilisation</span></label>
+            </div>
+            <div class="form-actions">
+              <button class="btn btn-primary" type="submit" data-i18n="registerNow">Créer mon compte</button>
+            </div>
+          </form>
+        </article>
+      </div>
+    </section>
+
+    <section id="backend">
+      <div class="container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow" data-i18n="backendEyebrow">Intégration backend</span>
+            <h2 data-i18n="backendTitle">Routes et payloads prêts pour le serveur.</h2>
+          </div>
+          <p data-i18n="backendText">Les recommandations de web.dev et d’Evil Martians insistent sur les champs correctement libellés, les types HTML adaptés, les autocomplete stables et les formulaires bien structurés pour l’authentification, et cette version suit cette base afin de faciliter l’intégration réelle. </p>
+        </div>
+        <div class="cards-3">
+          <article class="auth-card">
+            <h3 data-i18n="endpoint1Title">Route login</h3>
+            <p data-i18n="endpoint1Text">Connectez cette page à votre backend ou framework via une route POST dédiée.</p>
+            <code>POST /api/auth/login</code>
+          </article>
+          <article class="auth-card">
+            <h3 data-i18n="endpoint2Title">Route register</h3>
+            <p data-i18n="endpoint2Text">Le formulaire d’inscription envoie les données nécessaires pour créer le compte client.</p>
+            <code>POST /api/auth/register</code>
+          </article>
+          <article class="auth-card">
+            <h3 data-i18n="endpoint3Title">Réservation liée à l'utilisateur</h3>
+            <p data-i18n="endpoint3Text">Après authentification, liez l’utilisateur à ses demandes de location et à ses documents.</p>
+            <code>POST /api/reservations</code>
+          </article>
+        </div>
+        <article class="auth-card" style="margin-top:1rem;">
+          <h3 data-i18n="payloadTitle">Exemple de payload JSON</h3>
+          <div class="endpoint-list">
+            <div>
+              <strong data-i18n="loginPayloadTitle">Connexion</strong>
+              <code>{ "email": "client@example.com", "password": "secret123" }</code>
+            </div>
+            <div>
+              <strong data-i18n="registerPayloadTitle">Inscription</strong>
+              <code>{ "full_name": "Client MarxStein", "email": "client@example.com", "phone": "+237651536837", "password": "secret123", "password_confirmation": "secret123" }</code>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="container contact-grid">
+        <article class="contact-card">
+          <span class="eyebrow" data-i18n="contactEyebrow">Contact</span>
+          <h2 style="margin-top:1rem;" data-i18n="contactTitle">Parler avec MarxStein Group.</h2>
+          <p style="margin-top:1rem;" data-i18n="contactText">La page contact de MarxStein indique Douala, Cameroun, et publie le numéro de téléphone +237 6 73 05 96 49, tandis que cette version conserve aussi votre numéro WhatsApp demandé pour les réservations rapides. </p>
+          <div class="endpoint-list">
+            <div><strong data-i18n="telephoneLabel">Téléphone</strong><div><a href="tel:+237673059649">+237 6 73 05 96 49</a></div></div>
+            <div><strong>WhatsApp</strong><div><a href="https://wa.me/237651536837" target="_blank" rel="noopener noreferrer">+237651536837</a></div></div>
+            <div><strong data-i18n="locationLabel">Localisation</strong><div data-i18n="locationValue">Douala, Cameroun</div></div>
+            <div><strong>Email</strong><div><a href="mailto:contact@marxstein.com">contact@marxstein.com</a></div></div>
+          </div>
+        </article>
+        <article class="contact-card">
+          <span class="eyebrow" data-i18n="messageEyebrow">Message</span>
+          <h2 style="margin-top:1rem;" data-i18n="messageTitle">Envoyer une demande</h2>
+          <form style="margin-top:1rem; display:grid; gap:.85rem;">
+            <div class="field"><label for="contact-name" data-i18n="fullNameLabel">Nom complet</label><input class="input" id="contact-name" type="text"></div>
+            <div class="field"><label for="contact-phone" data-i18n="phoneLabel">Téléphone</label><input class="input" id="contact-phone" type="tel"></div>
+            <div class="field"><label for="contact-message" data-i18n="messageLabel">Message</label><textarea id="contact-message"></textarea></div>
+            <div class="form-actions"><button class="btn btn-primary" type="button" data-i18n="sendRequest">Envoyer la demande</button><a class="btn btn-whatsapp" href="https://wa.me/237651536837?text=Bonjour%20MarxStein%20Group" target="_blank" rel="noopener noreferrer">WhatsApp</a></div>
+          </form>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-row">
+      <p data-i18n="footer1">Version bilingue MarxStein Group pour location de voitures à Douala.</p>
+      <p data-i18n="footer2">Formulaires prêts pour connexion backend et expérience FR/EN.</p>
+    </div>
+  </footer>
+
+  <script>
+    (function () {
+      const translations = {
+        fr: {
+          brandTagline: 'Location de voitures à Douala', navFleet: 'Flotte', navBooking: 'Réservation', navAuth: 'Connexion', navBackend: 'Backend', navContact: 'Contact', loginBtn: 'Connexion', bookBtn: 'Réserver', heroEyebrow: 'Douala • Aéroport • Véhicules de luxe • SUV 4X4', heroTitle: 'Location premium et mobilité aéroportuaire à Douala.', heroText: 'MarxStein Group se présente comme une société privée de location de voitures basée à Douala, au Cameroun, et met en avant la location abordable, les véhicules de luxe, les SUV 4X4 et le service chauffeur. Cette version bilingue transforme cette offre en expérience de réservation moderne. ', heroCta1: 'Réserver un véhicule', stat1: 'Téléphone publié sur la page contact', stat2: 'WhatsApp pour devis et réservations', stat3a: 'Douala, Cameroun', stat3: 'Zone de service locale et transferts ville-aéroport', glass1Title: 'Service aéroport', glass1Text: 'Prise en charge DLA et livraison hôtel', glass2Title: 'Flotte luxe & 4X4', glass2Text: 'Business, famille et chauffeur', calcTitle: 'Calculateur de prix et réservation', pickupLabel: 'Lieu de départ', vehicleLabel: 'Type de véhicule', daysLabel: 'Nombre de jours', serviceLabel: 'Service', estimateTitle: 'Montant estimé', estimateText: 'Calcul = tarif journalier × jours + option chauffeur par jour.', submitReservation: 'Envoyer la réservation', sendWhatsapp: 'Envoyer par WhatsApp', fleetEyebrow: 'Flotte véhicules', fleetTitle: 'Liste des véhicules MarxStein Group.', fleetText: 'La page services de MarxStein met en avant la location abordable, les véhicules de luxe, les SUV 4X4 et le service chauffeur, et cette flotte reprend ces catégories sous forme de cartes claires avec prix journalier en XAF. ', fleet1Text: 'Parfaite pour les trajets urbains à Douala et les déplacements rapides.', fleet2Text: 'Idéale pour les rendez-vous d\'affaires, hôtels et transferts aéroport.', fleet3Text: 'Option haut de gamme pour confort, visibilité et routes variées.', selectText: 'Choisir', authEyebrow: 'Connexion', loginTitle: 'Connexion utilisateur prête pour backend.', loginText: 'Les bonnes pratiques de formulaires de connexion recommandent l’utilisation de balises form, label, name, id, type et autocomplete stables, ce qui est inclus ici pour faciliter l’intégration backend. ', emailLabel: 'Adresse e-mail', passwordLabel: 'Mot de passe', rememberMe: 'Se souvenir de moi', signIn: 'Se connecter', createAccount: 'Créer un compte', registerEyebrow: 'Inscription', registerTitle: 'Page d\'inscription prête pour backend.', registerText: 'Le formulaire d’inscription ci-dessous est structuré avec des noms de champs clairs et des attributs HTML adaptés pour simplifier la connexion à une API d’authentification ou à un framework backend. ', fullNameLabel: 'Nom complet', phoneLabel: 'Téléphone', confirmPasswordLabel: 'Confirmer le mot de passe', acceptTerms: 'J\'accepte les conditions d\'utilisation', registerNow: 'Créer mon compte', backendEyebrow: 'Intégration backend', backendTitle: 'Routes et payloads prêts pour le serveur.', backendText: 'Les recommandations de web.dev et d’Evil Martians insistent sur les champs correctement libellés, les types HTML adaptés, les autocomplete stables et les formulaires bien structurés pour l’authentification, et cette version suit cette base afin de faciliter l’intégration réelle. ', endpoint1Title: 'Route login', endpoint1Text: 'Connectez cette page à votre backend ou framework via une route POST dédiée.', endpoint2Title: 'Route register', endpoint2Text: 'Le formulaire d’inscription envoie les données nécessaires pour créer le compte client.', endpoint3Title: 'Réservation liée à l\'utilisateur', endpoint3Text: 'Après authentification, liez l’utilisateur à ses demandes de location et à ses documents.', payloadTitle: 'Exemple de payload JSON', loginPayloadTitle: 'Connexion', registerPayloadTitle: 'Inscription', contactEyebrow: 'Contact', contactTitle: 'Parler avec MarxStein Group.', contactText: 'La page contact de MarxStein indique Douala, Cameroun, et publie le numéro de téléphone +237 6 73 05 96 49, tandis que cette version conserve aussi votre numéro WhatsApp demandé pour les réservations rapides. ', telephoneLabel: 'Téléphone', locationLabel: 'Localisation', locationValue: 'Douala, Cameroun', messageEyebrow: 'Message', messageTitle: 'Envoyer une demande', messageLabel: 'Message', sendRequest: 'Envoyer la demande', footer1: 'Version bilingue MarxStein Group pour location de voitures à Douala.', footer2: 'Formulaires prêts pour connexion backend et expérience FR/EN.'
+        },
+        en: {
+          brandTagline: 'Car rental in Douala', navFleet: 'Fleet', navBooking: 'Booking', navAuth: 'Login', navBackend: 'Backend', navContact: 'Contact', loginBtn: 'Login', bookBtn: 'Book now', heroEyebrow: 'Douala • Airport • Luxury vehicles • 4X4 SUVs', heroTitle: 'Premium car rental and airport mobility in Douala.', heroText: 'MarxStein Group presents itself as a private car rental company based in Douala, Cameroon, and highlights affordable hire, luxury vehicles, 4X4 SUVs, and chauffeur service. This bilingual version turns that offer into a modern reservation experience. ', heroCta1: 'Reserve a vehicle', stat1: 'Phone published on the contact page', stat2: 'WhatsApp for quotations and bookings', stat3a: 'Douala, Cameroon', stat3: 'Local service zone and airport-city transfers', glass1Title: 'Airport service', glass1Text: 'DLA pickup and hotel delivery', glass2Title: 'Luxury & 4X4 fleet', glass2Text: 'Business, family, and chauffeur options', calcTitle: 'Pricing calculator and booking', pickupLabel: 'Pickup location', vehicleLabel: 'Vehicle type', daysLabel: 'Number of days', serviceLabel: 'Service', estimateTitle: 'Estimated amount', estimateText: 'Estimate = daily rate × days + chauffeur option per day.', submitReservation: 'Submit reservation', sendWhatsapp: 'Send by WhatsApp', fleetEyebrow: 'Vehicle fleet', fleetTitle: 'MarxStein Group vehicle listing.', fleetText: 'MarxStein’s services page highlights affordable rental, luxury vehicles, 4X4 SUVs, and chauffeur service, and this fleet mirrors those categories with clear daily XAF pricing. ', fleet1Text: 'Ideal for city movement in Douala and quick trips.', fleet2Text: 'Best for business meetings, hotels, and airport transfers.', fleet3Text: 'High-end option for comfort, visibility, and varied roads.', selectText: 'Select', authEyebrow: 'Login', loginTitle: 'Backend-ready user login.', loginText: 'Login form best practices recommend stable form, label, name, id, type, and autocomplete attributes, and those are included here to make backend integration easier. ', emailLabel: 'Email address', passwordLabel: 'Password', rememberMe: 'Remember me', signIn: 'Sign in', createAccount: 'Create account', registerEyebrow: 'Register', registerTitle: 'Backend-ready registration page.', registerText: 'The registration form below uses clear field names and suitable HTML attributes to simplify connection to an authentication API or backend framework. ', fullNameLabel: 'Full name', phoneLabel: 'Phone', confirmPasswordLabel: 'Confirm password', acceptTerms: 'I accept the terms of use', registerNow: 'Create my account', backendEyebrow: 'Backend integration', backendTitle: 'Server-ready routes and payloads.', backendText: 'Guidance from web.dev and Evil Martians emphasizes properly labeled fields, suitable HTML types, stable autocomplete values, and well-structured forms for authentication, and this version follows that base to support real integration. ', endpoint1Title: 'Login route', endpoint1Text: 'Connect this page to your backend or framework through a dedicated POST route.', endpoint2Title: 'Register route', endpoint2Text: 'The registration form sends the core data required to create a customer account.', endpoint3Title: 'User-linked reservation', endpoint3Text: 'After authentication, connect the user to rental requests and stored documents.', payloadTitle: 'Sample JSON payload', loginPayloadTitle: 'Login', registerPayloadTitle: 'Register', contactEyebrow: 'Contact', contactTitle: 'Talk to MarxStein Group.', contactText: 'The MarxStein contact page lists Douala, Cameroon and publishes the phone number +237 6 73 05 96 49, while this version also keeps your requested WhatsApp number for quick bookings. ', telephoneLabel: 'Telephone', locationLabel: 'Location', locationValue: 'Douala, Cameroon', messageEyebrow: 'Message', messageTitle: 'Send a request', messageLabel: 'Message', sendRequest: 'Send request', footer1: 'Bilingual MarxStein Group version for car rental in Douala.', footer2: 'Forms are ready for backend connection and FR/EN experience.'
+        }
+      };
+
+      const root = document.documentElement;
+      const themeToggle = document.querySelector('[data-theme-toggle]');
+      let theme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      root.setAttribute('data-theme', theme);
+      function renderThemeIcon() {
+        themeToggle.innerHTML = theme === 'dark'
+          ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg>'
+          : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"></circle><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"></path></svg>';
+      }
+      renderThemeIcon();
+      themeToggle.addEventListener('click', function () {
+        theme = theme === 'dark' ? 'light' : 'dark';
+        root.setAttribute('data-theme', theme);
+        renderThemeIcon();
+      });
+
+      const menuButton = document.querySelector('.menu-toggle');
+      const nav = document.querySelector('.nav-links');
+      menuButton.addEventListener('click', function () {
+        const expanded = menuButton.getAttribute('aria-expanded') === 'true';
+        menuButton.setAttribute('aria-expanded', String(!expanded));
+        nav.classList.toggle('open');
+      });
+      nav.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', function () {
+          nav.classList.remove('open');
+          menuButton.setAttribute('aria-expanded', 'false');
+        });
+      });
+
+      let currentLang = 'fr';
+      const langButtons = document.querySelectorAll('.lang-btn');
+      function applyTranslations(lang) {
+        currentLang = lang;
+        document.documentElement.lang = lang;
+        document.querySelectorAll('[data-i18n]').forEach(function (el) {
+          const key = el.getAttribute('data-i18n');
+          if (translations[lang][key]) el.textContent = translations[lang][key];
+        });
+        document.querySelectorAll('[data-i18n-option]').forEach(function (el) {
+          const key = el.getAttribute('data-i18n-option');
+          if (key === 'selfDrive') el.textContent = lang === 'fr' ? 'Sans chauffeur' : 'Self-drive';
+          if (key === 'chauffeur') el.textContent = lang === 'fr' ? 'Avec chauffeur' : 'With chauffeur';
+        });
+        langButtons.forEach(function (btn) { btn.classList.toggle('active', btn.dataset.lang === lang); });
+      }
+      langButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () { applyTranslations(btn.dataset.lang); });
+      });
+      applyTranslations('fr');
+
+      const vehicle = document.getElementById('vehicle');
+      const days = document.getElementById('days');
+      const service = document.getElementById('service');
+      const result = document.getElementById('priceResult');
+      function formatXaf(value) { return new Intl.NumberFormat('fr-FR').format(value) + ' XAF'; }
+      function updatePrice() {
+        const total = (Number(vehicle.value) * Math.max(1, Number(days.value) || 1)) + (Number(service.value) * Math.max(1, Number(days.value) || 1));
+        result.textContent = formatXaf(total);
+      }
+      [vehicle, days, service].forEach(function (el) {
+        el.addEventListener('input', updatePrice);
+        el.addEventListener('change', updatePrice);
+      });
+      updatePrice();
+
+      document.getElementById('bookingForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert(currentLang === 'fr' ? 'Demande de réservation enregistrée côté interface. Connectez ce formulaire à votre backend.' : 'Reservation request captured on the front end. Connect this form to your backend.');
+      });
+      document.getElementById('loginForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert(currentLang === 'fr' ? 'Connexion simulée. Route cible: /api/auth/login' : 'Login simulated. Target route: /api/auth/login');
+      });
+      document.getElementById('registerForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        alert(currentLang === 'fr' ? 'Inscription simulée. Route cible: /api/auth/register' : 'Registration simulated. Target route: /api/auth/register');
+      });
+    }());
+  </script>
+</body>
+</html>
